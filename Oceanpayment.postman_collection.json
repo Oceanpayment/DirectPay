@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "a720d3b5-9a26-49b0-99b5-efc59522ab5c",
+		"name": "Oceanpayment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "11621200"
+	},
+	"item": [
+		{
+			"name": "DirectPay",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"data = request.data;\r",
+							"\r",
+							"account = data.account;\r",
+							"terminal = data.terminal;\r",
+							"order_number = data.order_number;\r",
+							"order_currency = data.order_currency;\r",
+							"order_amount = data.order_amount;\r",
+							"card_number = data.card_number;\r",
+							"card_year = data.card_year;\r",
+							"card_month = data.card_month;\r",
+							"card_secureCode = data.card_secureCode;\r",
+							"billing_firstName = data.billing_firstName;\r",
+							"billing_lastName = data.billing_lastName;\r",
+							"billing_email = data.billing_email;\r",
+							"secureCode = '40b8rx2L606D4nl2rDPJ0L2tp208Z840VPp2Z0x220606L6r6dr24J264L2X84XB';\r",
+							" \r",
+							"var str = account + terminal + order_number + order_currency + order_amount + card_number + card_year + card_month + card_secureCode + billing_firstName + billing_lastName + billing_email + secureCode;\r",
+							"console.log(str);\r",
+							"\r",
+							"\r",
+							"\r",
+							"//MD5 encryption of STR\r",
+							"var signValue= CryptoJS.SHA256(str).toString();\r",
+							"pm.globals.set('signValue', signValue);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "account",
+							"value": "995398",
+							"type": "text"
+						},
+						{
+							"key": "terminal",
+							"value": "99539801",
+							"type": "text"
+						},
+						{
+							"key": "signValue",
+							"value": "{{signValue}}",
+							"type": "text"
+						},
+						{
+							"key": "methods",
+							"value": "Credit Card",
+							"type": "text"
+						},
+						{
+							"key": "order_number",
+							"value": "202502011231",
+							"type": "text"
+						},
+						{
+							"key": "order_currency",
+							"value": "USD",
+							"type": "text"
+						},
+						{
+							"key": "order_amount",
+							"value": "0.1",
+							"type": "text"
+						},
+						{
+							"key": "noticeUrl",
+							"value": "https://test.back.com",
+							"type": "text"
+						},
+						{
+							"key": "backUrl",
+							"value": "https://test.notify.com",
+							"type": "text"
+						},
+						{
+							"key": "billing_firstName",
+							"value": "N/A",
+							"type": "text"
+						},
+						{
+							"key": "billing_lastName",
+							"value": "N/A",
+							"type": "text"
+						},
+						{
+							"key": "billing_email",
+							"value": "test@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "billing_phone",
+							"value": "12345678",
+							"type": "text"
+						},
+						{
+							"key": "billing_country",
+							"value": "HK",
+							"type": "text"
+						},
+						{
+							"key": "billing_city",
+							"value": "HK",
+							"type": "text"
+						},
+						{
+							"key": "billing_address",
+							"value": "HK",
+							"type": "text"
+						},
+						{
+							"key": "billing_zip",
+							"value": "96801",
+							"type": "text"
+						},
+						{
+							"key": "productSku",
+							"value": "#001",
+							"type": "text"
+						},
+						{
+							"key": "productName",
+							"value": "TEST",
+							"type": "text"
+						},
+						{
+							"key": "productNum",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "travel_adult",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "travel_child",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "travel_infant",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "billing_ip",
+							"value": "127.0.0.1",
+							"type": "text"
+						},
+						{
+							"key": "card_number",
+							"value": "4111111111111111",
+							"type": "text"
+						},
+						{
+							"key": "card_year",
+							"value": "2030",
+							"type": "text"
+						},
+						{
+							"key": "card_month",
+							"value": "06",
+							"type": "text"
+						},
+						{
+							"key": "card_secureCode",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": "https://test-secure.oceanpayment.com/gateway/direct/pay"
+			},
+			"response": []
+		}
+	]
+}
